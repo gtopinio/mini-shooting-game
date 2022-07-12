@@ -1,17 +1,20 @@
 package miniprojtemplate;
 
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class InstructionStage {
@@ -101,7 +104,7 @@ public class InstructionStage {
 
 
 		Font subFont = Font.font("OCR A Extended",FontWeight.EXTRA_BOLD,23);//setting font for sub-headings
-		Text sprites = new Text("The In-Game Sprites:"); sprites.setFont(subFont); sprites.setLayoutX(20); sprites.setLayoutY(35);
+		Text sprites = new Text("The In-Game Sprites:"); sprites.setFont(subFont); sprites.setLayoutX(125); sprites.setLayoutY(35);
 		sprites.setFill(Color.LAWNGREEN);
 
 		Text controls = new Text("Controls"); controls.setFont(subFont); controls.setLayoutX(630); controls.setLayoutY(35);
@@ -147,13 +150,37 @@ public class InstructionStage {
 		shootCtrl.setFill(Color.WHITE);
 		// End of Adding Game Descriptions
 
-		spriteGrp.getChildren().addAll(gunner, normalFish, bossFish,pearlTitle, starTitle, multishotTitle, keysCtrls, shootCtrl);
+		// Adding a back button
+		Font btnFont = Font.font("Bahnschrift",FontWeight.EXTRA_BOLD,12);
+		Button backGameBtn = new Button("Back");
+		backGameBtn.setFont(btnFont);
+		backGameBtn.setLayoutX(18);
+		backGameBtn.setLayoutY(18);
+
+		this.addEventHandler(backGameBtn);
+
+		spriteGrp.getChildren().addAll(gunner, normalFish, bossFish,pearlTitle, starTitle, multishotTitle, keysCtrls, shootCtrl, backGameBtn);
 
 		this.root.getChildren().add(spriteGrp);
 		this.stage.setTitle("Instructions");
 		this.stage.setScene(this.scene);
 
 		this.stage.show();
+	}
+
+	private void addEventHandler(Button btn) {
+		btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			public void handle(MouseEvent arg0) {
+				switch(btn.getText()){
+
+				case "Back":
+					GameStartStage theGameStartStage = new GameStartStage();
+					theGameStartStage.setStage(stage, 1);
+
+				}
+			}
+		});
 	}
 }
 

@@ -94,7 +94,7 @@ public class GameOverStage {
 					break;
 				case "Back to Menu":
 					GameStartStage theGameStartStage = new GameStartStage();
-					theGameStartStage.setStage(gameOverStage);
+					theGameStartStage.setStage(gameOverStage, 0);
 					break;
 				}
 

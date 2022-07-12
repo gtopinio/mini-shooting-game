@@ -1,9 +1,12 @@
 package miniprojtemplate;
 
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -102,7 +105,16 @@ public class AboutStage {
 				+ "\t\tLink: https://stackoverflow.com/a\n\t\t/23500512/15416780");
 		references2.setLayoutX(440); references2.setLayoutY(375); references2.setFill(Color.WHITE);references2.setFont(referenceFont);
 
-		descGroup.getChildren().addAll(aboutTitle,referencesTitle, aboutDev, references1, references2, subDetails);
+		// Adding a back button
+		Font btnFont = Font.font("Bahnschrift",FontWeight.EXTRA_BOLD,12);
+		Button backGameBtn = new Button("Back");
+		backGameBtn.setFont(btnFont);
+		backGameBtn.setLayoutX(740);
+		backGameBtn.setLayoutY(18);
+
+		this.addEventHandler(backGameBtn);
+
+		descGroup.getChildren().addAll(aboutTitle,referencesTitle, aboutDev, references1, references2, subDetails, backGameBtn);
 		this.root.getChildren().add(descGroup);
 		//End of Title and Descriptions texts
 
@@ -118,6 +130,19 @@ public class AboutStage {
 		this.stage.show();
 	}
 
+	private void addEventHandler(Button btn) {
+		btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
+			public void handle(MouseEvent arg0) {
+				switch(btn.getText()){
+
+				case "Back":
+					GameStartStage theGameStartStage = new GameStartStage();
+					theGameStartStage.setStage(stage, 1);
+
+				}
+			}
+		});
+	}
 
 }

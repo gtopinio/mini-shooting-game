@@ -20,7 +20,7 @@ public class Main extends Application {
 
 	public void start(Stage stage){
 		GameStartStage theGameStartStage = new GameStartStage();
-		theGameStartStage.setStage(stage);
+		theGameStartStage.setStage(stage, 0);
 	}
 
 }

@@ -42,12 +42,12 @@ public class GameStartStage {
 //		this.canvas = new Canvas(GameStartStage.WINDOW_WIDTH,GameStartStage.WINDOW_HEIGHT);
 //		this.gc = canvas.getGraphicsContext2D();
 
-		Media bgm1 = new Media(new File(GameStartStage.MAIN_MUSIC).toURI().toString());
-		GameStartStage.mediaPlayer = new MediaPlayer(bgm1);
+//		Media bgm1 = new Media(new File(GameStartStage.MAIN_MUSIC).toURI().toString());
+//		GameStartStage.mediaPlayer = new MediaPlayer(bgm1);
 	}
 
 	//method to add the stage elements
-	public void setStage(Stage stage) {
+	public void setStage(Stage stage, int musicContinue) {
 //		this.gc.drawImage(bg, -118, 0);
 		this.stage = stage;
 		ImageView mainBg = new ImageView();
@@ -104,7 +104,10 @@ public class GameStartStage {
 
 
 		//Playing and looping the music (NES Shooter Music by SketchyLogic)
-		GameStartStage.playMusic(GameStartStage.MAIN_MUSIC);
+		//if musicContinue is not zero, it means that the GameStartStage music is still playing
+		if(musicContinue == 0){
+			GameStartStage.playMusic(GameStartStage.MAIN_MUSIC);
+		}
 	}
 
 	private void addEventHandler(Button btn) {
@@ -128,12 +131,14 @@ public class GameStartStage {
 					Stage instructStage = new Stage();
 					InstructionStage theInstructions = new InstructionStage();
 					theInstructions.setStage(instructStage);
+					stage.close();
 					break;
 				case "About":
 					System.out.println("About");
 					Stage aboutStage = new Stage();
 					AboutStage aboutMe = new AboutStage();
 					aboutMe.setStage(aboutStage);
+					stage.close();
 					break;
 
 				}
