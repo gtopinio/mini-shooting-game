@@ -45,7 +45,7 @@ public class Ship extends Sprite{
 		 */
 		if(this.multishot == false){
 			Bullet b = new Bullet(x,y);
-			b.setBulletStrength(this.getIinitStrength());
+			b.setBulletStrength(this.getInitStrength());
 			this.bullets.add(b);
 		}
 		else{ // Setting up additional bullets if multishot attribute is active
@@ -53,9 +53,9 @@ public class Ship extends Sprite{
 			Bullet b = new Bullet(x,y);
 			Bullet bTop = new Bullet(x,top); // the top bullet
 			Bullet bBot = new Bullet(x, bot); // the bottom bullet
-			b.setBulletStrength(this.getIinitStrength());
-			bTop.setBulletStrength(this.getIinitStrength());
-			bBot.setBulletStrength(this.getIinitStrength());
+			b.setBulletStrength(this.getInitStrength());
+			bTop.setBulletStrength(this.getInitStrength());
+			bBot.setBulletStrength(this.getInitStrength());
 			this.bullets.add(b); this.bullets.add(bTop); this.bullets.add(bBot);
 		}
     }
@@ -86,7 +86,7 @@ public class Ship extends Sprite{
 		return this.strength;
 	}
 
-	int getIinitStrength(){
+	int getInitStrength(){
 		return this.initStrength;
 	}
 

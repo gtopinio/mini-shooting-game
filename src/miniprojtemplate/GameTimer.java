@@ -60,6 +60,8 @@ public class GameTimer extends AnimationTimer{
 
 	public static final Image bg = new Image("images/gameStageBG.png",GameStage.WINDOW_WIDTH,GameStage.WINDOW_HEIGHT,false,false);
 	public static final Image heart = new Image("images/heart.gif",30,30,false,false); // heart icon for the Ship's strength/HP
+	public final static Image boss = new Image("images/boss.gif",Fish.FISH_WIDTH*0.7,Fish.FISH_WIDTH*0.45,false,false); // boss icon for boss health
+
 	GameTimer(GraphicsContext gc, Scene theScene){
 		this.gc = gc;
 		this.theScene = theScene;
@@ -172,6 +174,11 @@ public class GameTimer extends AnimationTimer{
 		this.setTimer(passedTime);
 		this.showScore(this.myShip);
 		this.showHealth(this.myShip);
+		for(int i=0; i<fishes.size(); i++){
+			if(fishes.get(i).getType() == Fish.BOSS_FISH_TYPE){
+					this.showBossHealth(fishes.get(i).getHealth());
+			}
+		}
 
 		//render the ship
 		this.myShip.render(this.gc);
@@ -192,7 +199,7 @@ public class GameTimer extends AnimationTimer{
 		System.out.println("Fishes: " + fishes.size());
 		System.out.println("Bullets: " + this.myShip.getBullets().size());
 		System.out.println("Immortal: " + this.myShip.isImmortal());
-		System.out.println("Bullet dmg: " + this.myShip.getIinitStrength());
+		System.out.println("Bullet dmg: " + this.myShip.getInitStrength());
 		System.out.println("Ship strength: " + this.myShip.getStrength());
 		System.out.println("Multishot: " + this.myShip.isMultiActive());
 		for(Fish f: fishes){
@@ -263,7 +270,7 @@ public class GameTimer extends AnimationTimer{
 		}else{
 			this.gc.setFill(Color.LAWNGREEN); //normal health bar's color is GREEN
 		}
-		double healthStatus = (double) myShip.getStrength()/(double) myShip.getIinitStrength(); //percentage of the Ship's current strength
+		double healthStatus = (double) myShip.getStrength()/(double) myShip.getInitStrength(); //percentage of the Ship's current strength
 		if(healthStatus >= 1.0){
 			this.gc.fillRect(20, 10,200,10); // max health bar width
 		}else{
@@ -271,6 +278,22 @@ public class GameTimer extends AnimationTimer{
 		}
 		this.gc.drawImage(heart, 0, 0);
 
+	}
+
+	//method to show the boss' current health
+	private void showBossHealth(int bossHealth){
+
+		double initBossHealth = 3000.0;
+
+		this.gc.setFill(Color.RED);
+
+		double healthStatus = (double) bossHealth / initBossHealth;
+		if(healthStatus >= 1.0){
+			this.gc.fillRect(20, 40, 200, 10);
+		} else {
+			this.gc.fillRect(20, 40,200*healthStatus,10);
+		}
+		this.gc.drawImage(boss, 3, 35);
 	}
 
 	//method to check Bullet collisions
